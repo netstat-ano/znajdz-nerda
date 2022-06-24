@@ -1,0 +1,17 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/animations";
+@import "../../assets/scss/variables";
+.container {
+    border: 1px solid $xbox-theme;
+    input {
+        padding: 0.2rem;
+        margin: 0.5rem;
+    }
+}
+.hop {
+    animation-name: hop;
+    animation-duration: 1s;
+}
+.error {
+    color: $error-theme;
+}

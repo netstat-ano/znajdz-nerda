@@ -1,0 +1,12 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/animations";
+.ps-font {
+    color: $playstation-theme;
+}
+.xbox-font {
+    color: $xbox-theme;
+}
+.hop {
+    animation-name: hop;
+    animation-duration: 1s;
+}
