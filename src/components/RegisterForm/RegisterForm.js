@@ -31,7 +31,6 @@ const RegisterForm = (props) => {
             navigate("../main", { replace: true });
         }
     };
-    console.log(isRetypePasswordError);
     return (
         <div className={`${styles.container} ${styles.hop} p-3`}>
             <form onSubmit={onRegisterHandler}>

@@ -1,4 +1,5 @@
 import LandingPage from "./pages/LandingPage/LandingPage";
+import Main from "./pages/Main/Main";
 import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
     return (
@@ -9,6 +10,7 @@ function App() {
                     path="/"
                 />
                 <Route element={<LandingPage />} path={"/welcome"} />
+                <Route element={<Main />} path={"/main"} />
             </Routes>
         </div>
     );

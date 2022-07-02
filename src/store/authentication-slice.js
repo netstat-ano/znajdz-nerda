@@ -32,15 +32,20 @@ export const signUp = (user) => {
             displayName: user.username,
         });
         const updates = {};
-        updates[`users/${auth.currentUser.uid}`] = {
+        const userData = {
             ...auth.currentUser.metadata,
             uid: auth.currentUser.uid,
             displayName: auth.currentUser.displayName,
             email: auth.currentUser.email,
         };
+        updates[`users/${auth.currentUser.uid}`] = userData;
         await update(ref(database), updates);
-        console.log(auth.currentUser);
-        dispatch(authenticationSliceActions.logIn(auth.currentUser));
+        dispatch(
+            authenticationSliceActions.logIn({
+                user: auth.currentUser,
+                userData,
+            })
+        );
     };
 };
 export const logIn = (user) => {
