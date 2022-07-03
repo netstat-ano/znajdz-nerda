@@ -4,10 +4,19 @@ import { storage } from "../../firebase";
 import { deleteObject } from "firebase/storage";
 import { uploadBytes, ref as sRef, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import PhotoInput from "../PhotoInput/PhotoInput";
 const AddPhotos = (props) => {
     const user = useSelector((state) => state.authentication.user);
     const [photos, setPhotos] = useState(["", "", "", "", "", "", "", "", ""]);
+    const inputRefFirst = useRef();
+    const inputRefSecond = useRef();
+    const inputRefThird = useRef();
+    const inputRefFourth = useRef();
+    const inputRefFifth = useRef();
+    const inputRefSixth = useRef();
+    const inputRefSeventh = useRef();
+    const inputRefNineth = useRef();
     useEffect(() => {
         const fetchPhotos = async () => {
             for (let i = 1; i < 10; i++) {
@@ -58,211 +67,65 @@ const AddPhotos = (props) => {
         <div>
             <div>Czekaj stop, najpierw dodaj co najmniej jedno zdjęcie</div>
             <div className={styles["photo-container"]}>
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[0]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[0] && (
-                        <Delete id={0} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo1"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo1">+</label>
-                    </div>
-                </div>
+                <PhotoInput
+                    photo={photos[0]}
+                    id={0}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
 
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[1]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[1] && (
-                        <Delete id={1} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo2"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo2">+</label>
-                    </div>
-                </div>
+                <PhotoInput
+                    photo={photos[1]}
+                    id={1}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
 
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[2]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[2] && (
-                        <Delete id={2} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo3"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo3">+</label>
-                    </div>
-                </div>
+                <PhotoInput
+                    photo={photos[2]}
+                    id={2}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
+                <PhotoInput
+                    photo={photos[3]}
+                    id={3}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
 
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[3]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[3] && (
-                        <Delete id={3} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo4"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo4">+</label>
-                    </div>
-                </div>
+                <PhotoInput
+                    photo={photos[4]}
+                    id={4}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
 
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[4]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[4] && (
-                        <Delete id={4} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo5"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo5">+</label>
-                    </div>
-                </div>
+                <PhotoInput
+                    photo={photos[5]}
+                    id={5}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
 
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[5]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[5] && (
-                        <Delete id={5} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo6"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo6">+</label>
-                    </div>
-                </div>
-
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[6]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[6] && (
-                        <Delete id={6} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo7"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo7">+</label>
-                    </div>
-                </div>
-
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[7]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[7] && (
-                        <Delete id={7} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo8"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo8">+</label>
-                    </div>
-                </div>
-                <div
-                    style={{
-                        backgroundImage: `url(${photos[8]})`,
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className={styles.photo}
-                >
-                    {photos[8] && (
-                        <Delete id={8} onDelete={onDeletePhotoHandler} />
-                    )}
-                    <div className={styles.flex}>
-                        <input
-                            onChange={onUploadPhotoHandler}
-                            id="photo9"
-                            className={styles["d-none"]}
-                            type="file"
-                        ></input>
-                        <label htmlFor="photo9">+</label>
-                    </div>
-                </div>
+                <PhotoInput
+                    photo={photos[6]}
+                    id={6}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
+                <PhotoInput
+                    photo={photos[7]}
+                    id={7}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
+                <PhotoInput
+                    photo={photos[8]}
+                    id={8}
+                    onDeletePhotoHandler={onDeletePhotoHandler}
+                    onUploadPhotoHandler={onUploadPhotoHandler}
+                />
             </div>
         </div>
     );

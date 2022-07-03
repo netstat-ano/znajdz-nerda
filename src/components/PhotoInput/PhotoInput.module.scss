@@ -1,0 +1,19 @@
+@import "../../assets/scss/variables.scss";
+.photo {
+    font-size: 5rem;
+    border: 1px solid $xbox-theme;
+    margin: 0.5rem;
+    width: 140px;
+    height: 200px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.d-none {
+    display: none;
+}
