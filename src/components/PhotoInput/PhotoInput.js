@@ -1,6 +1,7 @@
 import Delete from "../Delete/Delete";
 import styles from "./PhotoInput.module.scss";
-const PhotoInput = (props) => {
+import { forwardRef } from "react";
+const PhotoInput = forwardRef((props, ref) => {
     return (
         <div
             style={{
@@ -16,14 +17,15 @@ const PhotoInput = (props) => {
             )}
             <div className={styles.flex}>
                 <input
+                    ref={ref}
                     onInput={props.onUploadPhotoHandler}
-                    id="photo1"
+                    id={`photo${props.id + 1}`}
                     className={styles["d-none"]}
                     type="file"
                 ></input>
-                <label htmlFor="photo1">+</label>
+                <label htmlFor={`photo${props.id + 1}`}>+</label>
             </div>
         </div>
     );
-};
+});
 export default PhotoInput;
