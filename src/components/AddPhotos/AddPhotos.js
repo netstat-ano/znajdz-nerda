@@ -1,5 +1,4 @@
 import styles from "./AddPhotos.module.scss";
-import Delete from "../Delete/Delete";
 import { storage } from "../../firebase";
 import { deleteObject } from "firebase/storage";
 import { uploadBytes, ref as sRef, getDownloadURL } from "firebase/storage";
@@ -21,7 +20,7 @@ const AddPhotos = (props) => {
     console.log(photos);
     useEffect(() => {
         const fetchPhotos = async () => {
-            for (let i = 1; i < 10; i++) {
+            for (let i = 0; i < 9; i++) {
                 let photo;
                 try {
                     photo = await getDownloadURL(
@@ -42,7 +41,7 @@ const AddPhotos = (props) => {
     }, []);
     const onDeletePhotoHandler = (data) => {
         const { id } = data;
-        const photoRef = sRef(storage, `${user.uid}/photo${id + 1}`);
+        const photoRef = sRef(storage, `${user.uid}/photo${id}`);
         deleteObject(photoRef);
         setPhotos((prevState) => {
             prevState[id] = "";
@@ -70,17 +69,8 @@ const AddPhotos = (props) => {
     };
     const onUploadPhotoHandler = async (event) => {
         const { target } = event;
-        console.log(target);
-        let idNumber = Number(target.id[target.id.length]);
-        for (const element of photos) {
-            console.log(element);
-            if (element === "") {
-                idNumber = photos.indexOf(element);
-                break;
-            }
-        }
-        console.log(idNumber);
-        const storageRef = sRef(storage, `${user.uid}/photo${idNumber + 1}`);
+        let idNumber = Number(target.id[target.id.length - 1] - 1);
+        const storageRef = sRef(storage, `${user.uid}/photo${idNumber}`);
         await uploadBytes(storageRef, target.files[0]);
         setPhotos((prevState) => {
             prevState[idNumber] = window.URL.createObjectURL(target.files[0]);
