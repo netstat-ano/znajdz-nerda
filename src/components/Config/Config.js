@@ -1,10 +1,12 @@
+import { useState } from "react";
 import AddPhotos from "../AddPhotos/AddPhotos";
+import Gender from "../Gender/Gender";
 const Config = (props) => {
+    const [step, setStep] = useState("addPhotos");
     return (
         <div>
-            <form>
-                <AddPhotos />
-            </form>
+            {step === "addPhotos" && <AddPhotos setStep={setStep} />}
+            {step === "gender" && <Gender setStep={setStep} />}
         </div>
     );
 };

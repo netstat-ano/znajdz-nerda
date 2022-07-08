@@ -1,7 +1,8 @@
+import styles from "./Button.module.scss";
 const Button = (props) => {
     return (
         <button
-            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded`}
+            className={` ${styles.button} ${props.className}`}
             {...props.button}
         >
             {props.children}

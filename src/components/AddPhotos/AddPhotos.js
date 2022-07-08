@@ -4,10 +4,12 @@ import { deleteObject } from "firebase/storage";
 import { uploadBytes, ref as sRef, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
+import Button from "../Button/Button";
 import PhotoInput from "../PhotoInput/PhotoInput";
 const AddPhotos = (props) => {
     const user = useSelector((state) => state.authentication.user);
     const [photos, setPhotos] = useState(["", "", "", "", "", "", "", "", ""]);
+    const [isDisabled, setIsDisabled] = useState(true);
     const inputRefFirst = useRef();
     const inputRefSecond = useRef();
     const inputRefThird = useRef();
@@ -17,7 +19,18 @@ const AddPhotos = (props) => {
     const inputRefSeventh = useRef();
     const inputRefEighth = useRef();
     const inputRefNineth = useRef();
-    console.log(photos);
+    const onNextStepHandler = (event) => {
+        event.preventDefault();
+        props.setStep("gender");
+    };
+    useEffect(() => {
+        for (const index in photos) {
+            if (photos[index] !== "") {
+                setIsDisabled(false);
+                break;
+            }
+        }
+    }, [photos]);
     useEffect(() => {
         const fetchPhotos = async () => {
             for (let i = 0; i < 9; i++) {
@@ -80,76 +93,86 @@ const AddPhotos = (props) => {
     return (
         <div>
             <div>Czekaj stop, najpierw dodaj co najmniej jedno zdjęcie</div>
-            <div className={styles["photo-container"]}>
-                <PhotoInput
-                    ref={inputRefFirst}
-                    photo={photos[0]}
-                    id={0}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
+            <form onSubmit={onNextStepHandler}>
+                <div className={styles["photo-container"]}>
+                    <PhotoInput
+                        ref={inputRefFirst}
+                        photo={photos[0]}
+                        id={0}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
 
-                <PhotoInput
-                    ref={inputRefSecond}
-                    photo={photos[1]}
-                    id={1}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
+                    <PhotoInput
+                        ref={inputRefSecond}
+                        photo={photos[1]}
+                        id={1}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
 
-                <PhotoInput
-                    ref={inputRefThird}
-                    photo={photos[2]}
-                    id={2}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
-                <PhotoInput
-                    ref={inputRefFourth}
-                    photo={photos[3]}
-                    id={3}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
+                    <PhotoInput
+                        ref={inputRefThird}
+                        photo={photos[2]}
+                        id={2}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
+                    <PhotoInput
+                        ref={inputRefFourth}
+                        photo={photos[3]}
+                        id={3}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
 
-                <PhotoInput
-                    ref={inputRefFifth}
-                    photo={photos[4]}
-                    id={4}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
+                    <PhotoInput
+                        ref={inputRefFifth}
+                        photo={photos[4]}
+                        id={4}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
 
-                <PhotoInput
-                    ref={inputRefSixth}
-                    photo={photos[5]}
-                    id={5}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
+                    <PhotoInput
+                        ref={inputRefSixth}
+                        photo={photos[5]}
+                        id={5}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
 
-                <PhotoInput
-                    ref={inputRefSeventh}
-                    photo={photos[6]}
-                    id={6}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
-                <PhotoInput
-                    ref={inputRefEighth}
-                    photo={photos[7]}
-                    id={7}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
-                <PhotoInput
-                    ref={inputRefNineth}
-                    photo={photos[8]}
-                    id={8}
-                    onDeletePhotoHandler={onDeletePhotoHandler}
-                    onUploadPhotoHandler={onUploadPhotoHandler}
-                />
-            </div>
+                    <PhotoInput
+                        ref={inputRefSeventh}
+                        photo={photos[6]}
+                        id={6}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
+                    <PhotoInput
+                        ref={inputRefEighth}
+                        photo={photos[7]}
+                        id={7}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
+                    <PhotoInput
+                        ref={inputRefNineth}
+                        photo={photos[8]}
+                        id={8}
+                        onDeletePhotoHandler={onDeletePhotoHandler}
+                        onUploadPhotoHandler={onUploadPhotoHandler}
+                    />
+                </div>
+                <div>
+                    <Button
+                        button={{ disabled: isDisabled, type: "submit" }}
+                        className={styles.button}
+                    >
+                        Dalej
+                    </Button>
+                </div>
+            </form>
         </div>
     );
 };
