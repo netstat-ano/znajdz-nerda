@@ -25,8 +25,8 @@ const Main = (props) => {
     }, []);
     return (
         <div className={styles.center}>
-            {!config && <Config />}
-            <ProfilesCard />
+            {!config && <Config setConfig={setConfig} />}
+            {config && <ProfilesCard />}
         </div>
     );
 };

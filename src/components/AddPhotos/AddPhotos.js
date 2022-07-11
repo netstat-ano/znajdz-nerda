@@ -21,7 +21,7 @@ const AddPhotos = (props) => {
     const inputRefNineth = useRef();
     const onNextStepHandler = (event) => {
         event.preventDefault();
-        props.setStep("gender");
+        props.setStep("age");
     };
     useEffect(() => {
         for (const index in photos) {
